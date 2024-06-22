@@ -22,5 +22,29 @@ void ast_print(Node* node) {
       printf("%u", number->value);
       break;
     }
+    case NODE_BINARY_OP: {
+      BinaryOpNode* binary_op = (BinaryOpNode*)node;
+      printf("(");
+      ast_print(binary_op->left);
+      printf(" ");
+      switch (binary_op->op) {
+        case TOK_OP_PLUS:
+          printf("+");
+          break;
+        case TOK_OP_MINUS:
+          printf("-");
+          break;
+        case TOK_OP_MULT:
+          printf("*");
+          break;
+        case TOK_OP_DIV:
+          printf("/");
+          break;
+      }
+      printf(" ");
+      ast_print(binary_op->right);
+      printf(")");
+      break;
+    }
   }
 }
